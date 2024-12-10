@@ -14,6 +14,9 @@ from facefusion.uis import overrides
 from facefusion.uis.typing import Component, ComponentName
 
 os.environ['GRADIO_ANALYTICS_ENABLED'] = '0'
+os.environ['GRADIO_SERVER_NAME'] = "0.0.0.0"
+os.environ['GRADIO_TEMP_DIR'] = 'H:/Temp/Gradio'
+os.environ['GRADIO_SHARE'] = "False"
 
 warnings.filterwarnings('ignore', category = UserWarning, module = 'gradio')
 
@@ -80,6 +83,7 @@ def register_ui_component(component_name : ComponentName, component: Component) 
 def launch() -> None:
 	ui_layouts_total = len(state_manager.get_item('ui_layouts'))
 	with gradio.Blocks(theme = get_theme(), css = get_css(), title = metadata.get('name') + ' ' + metadata.get('version'), fill_width = True) as ui:
+	#with gradio.Blocks(theme = 'JohnSmith9982/small_and_pretty', css = get_css(), title = metadata.get('name') + ' ' + metadata.get('version'), fill_width = True) as ui:
 		for ui_layout in state_manager.get_item('ui_layouts'):
 			ui_layout_module = load_ui_layout_module(ui_layout)
 
@@ -98,7 +102,7 @@ def launch() -> None:
 
 def get_theme() -> gradio.Theme:
 	return gradio.themes.Base(
-		primary_hue = gradio.themes.colors.red,
+		primary_hue = gradio.themes.colors.cyan,
 		secondary_hue = gradio.themes.colors.neutral,
 		radius_size = Size(
 			xxs = '0.375rem',
